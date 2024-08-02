@@ -49,11 +49,37 @@ void update_relay_pin(bool state) {
   mgos_gpio_write(pin_relay, state ? 0 : 1);
 }
 
+bool is_within_time_range(struct tm *current_time) {
+  int start_hour = mgos_sys_config_get_app_start_hour();
+  int start_minute = mgos_sys_config_get_app_start_minute();
+  int end_hour = mgos_sys_config_get_app_end_hour();
+  int end_minute = mgos_sys_config_get_app_end_minute();
+
+  int current_hour = current_time->tm_hour;
+  int current_minute = current_time->tm_min;
+
+  if (start_hour < end_hour || (start_hour == end_hour && start_minute <= end_minute)) {
+    return (current_hour > start_hour || (current_hour == start_hour && current_minute >= start_minute)) &&
+           (current_hour < end_hour || (current_hour == end_hour && current_minute <= end_minute));
+  } else {
+    return (current_hour > start_hour || (current_hour == start_hour && current_minute >= start_minute)) ||
+           (current_hour < end_hour || (current_hour == end_hour && current_minute <= end_minute));
+  }
+}
+
 void check_machine_state(void *arg) {
   int pin_machine = mgos_sys_config_get_app_pin_machine();
   bool machine_state = mgos_gpio_read(pin_machine);
 
   bool machine_on = (machine_state == 1); // If pin_machine is 1, set machine_on to true; otherwise, false
+
+  // Get the current time
+  time_t now = time(NULL);
+  struct tm *current_time = localtime(&now);
+
+  // Update machine_on based on the time range
+  bool within_time_range = is_within_time_range(current_time);
+  machine_on = within_time_range ? true : false;
 
   // Update and save only if there is a change in state
   if (machine_on != prev_machine_on) {

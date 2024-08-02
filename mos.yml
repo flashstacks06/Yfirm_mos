@@ -46,7 +46,10 @@ config_schema:
   - ["coin.pin", "i", 26, {title: "Coin pin"}]
   - ["coin.count_file", "s", "/counters.json", {title: "Coin count file"}]
   - ["coin.report_delay", "i", 5000, {title: "Coin report delay in ms"}]
+
   - ["app.machine_on", "b", false, {title: "Machine on state"}]
+  - ["app.enable_auto", "b", true, {title: "Enable automatic control"}]
+
 
   - ["wifi.sta1.ssid", "Inventoteca_2G"]
   - ["wifi.sta1.pass", "science_7425"]
@@ -88,4 +91,8 @@ config_schema:
   #- ["app.pin_relay", "i", 4, {title: "Pin number for machine control"}]
   - ["app.pin_relay", "i", 2, {title: "Pin number for machine control"}]
   - ["app.check_interval_ms", "i", 2000, {title: "Check interval in milliseconds"}]
+
+  - ["app.start_hour", "i", 6, {title: "Start hour (24h format)"}]
+  - ["app.end_hour", "i", 18, {title: "End hour (24h format)"}]
+  - ["sys.tz_spec", "CST6CDT,M4.1.0,M10.5.0", {title: "Time zone specification"}]
 

@@ -42,8 +42,15 @@ libs:
 
 
 config_schema:
-  - ["app.total_bag", "f", 0.0, {title: "Total Bag"}]
-  - ["coin.pin", "i", 26, {title: "Coin pin"}]
+
+  - ["app.machine_id", "s", "M-E2-EA-MUEE-0", {title: "Machine ID"}]
+  - ["app.total_bag", "i", 0, {title: "Total Bag"}]
+  - ["app.total_gift", "i", 0, {title: "Total Gift"}]
+  - ["app.init_bag", "i", 0, {title: "Initial Bag"}]
+  - ["app.init_gift", "i", 0, {title: "Initial Gift"}]
+  - ["app.costo", "i", 10, {title: "Cost per game"}]
+  - ["app.games", "i", 0, {title: "Number of games played"}]
+
   - ["coin.count_file", "s", "/counters.json", {title: "Coin count file"}]
   - ["coin.report_delay", "i", 5000, {title: "Coin report delay in ms"}]
 
@@ -64,8 +71,7 @@ config_schema:
   - ["mqtt.enable", "b", true, {title: "Enable MQTT"}]
   - ["mqtt.server", "s", "broker.emqx.io:1883", {title: "MQTT Server"}]
   - ["rpc.mqtt.enable", "b", true, {title: "Enable RPC over MQTT"}]
-  - ["rpc.mqtt.pub_topic", "s", "rpc/pub", {title: "RPC Publish Topic"}]
-  - ["rpc.mqtt.sub_topic", "s", "rpc/sub", {title: "RPC Subscribe Topic"}]
+
 
   - ["sys.mount.fs_size", "i", 2048, {title: "Filesystem size in KB"}]
 
@@ -88,11 +94,15 @@ config_schema:
 
   - ["app.pin_machine", "i", 33, {title: "Pin number for machine control"}]
   - ["app.machine_on", "b", false, {title: "Machine on state"}]
-  #- ["app.pin_relay", "i", 4, {title: "Pin number for machine control"}]
-  - ["app.pin_relay", "i", 2, {title: "Pin number for machine control"}]
+  - ["app.pin_relay", "i", 4, {title: "Pin number for machine control"}]
+  #- ["app.pin_relay", "i", 2, {title: "Pin number for machine control"}]
   - ["app.check_interval_ms", "i", 2000, {title: "Check interval in milliseconds"}]
 
   - ["app.start_hour", "i", 6, {title: "Start hour (24h format)"}]
-  - ["app.end_hour", "i", 18, {title: "End hour (24h format)"}]
-  - ["sys.tz_spec", "CST6CDT,M4.1.0,M10.5.0", {title: "Time zone specification"}]
+  - ["app.end_hour", "i", 7, {title: "End hour (24h format)"}]
+  - ["sys.tz_spec", "CST7CDT,M4.1.0,M10.5.0"]
+
+  - ["app.pin_coin_counter", "i", 26, {title: "Pin number for coin counter"}]
+  - ["app.pin_gift_counter", "i", 25, {title: "Pin number for gift counter"}]
+
 

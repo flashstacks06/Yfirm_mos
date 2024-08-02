@@ -18,20 +18,27 @@ filesystem:
   - fs
 
 libs:
+  #- origin: https://github.com/mongoose-os-libs/boards
+  #- origin: https://github.com/mongoose-os-libs/js-demo-bundle
   - origin: https://github.com/mongoose-os-libs/core
-  - origin: https://github.com/mongoose-os-libs/vfs-common
+  - origin: https://github.com/mongoose-os-libs/ca-bundle
+  - origin: https://github.com/mongoose-os-libs/rpc-service-config
   - origin: https://github.com/mongoose-os-libs/rpc-service-fs
-  - origin: https://github.com/mongoose-os-libs/rpc-common
-  - origin: https://github.com/mongoose-os-libs/rpc-loopback
+  - origin: https://github.com/mongoose-os-libs/rpc-service-i2c
   - origin: https://github.com/mongoose-os-libs/rpc-uart
+  - origin: https://github.com/mongoose-os-libs/rpc-service-gpio
+  #- origin: https://github.com/mongoose-os-libs/mjs 
   - origin: https://github.com/mongoose-os-libs/wifi
+  - origin: https://github.com/mongoose-os-libs/sntp
+  #- origin: https://github.com/mongoose-os-libs/ota-http-server
+  - origin: https://github.com/mongoose-os-libs/rpc-service-ota
+  - origin: https://github.com/mongoose-os-libs/dash
+  #- origin: https://github.com/mongoose-os-libs/shadow
+  - origin: https://github.com/mongoose-os-libs/file-logger
+  - origin: https://github.com/mongoose-os-libs/i2c
+  - origin: https://github.com/mongoose-os-libs/ds3231
   - origin: https://github.com/mongoose-os-libs/mqtt
   - origin: https://github.com/mongoose-os-libs/rpc-mqtt
-  - origin: https://github.com/mongoose-os-libs/dash
-  - origin: https://github.com/mongoose-os-libs/ds3231
-  - origin: https://github.com/mongoose-os-libs/i2c
-  - origin: https://github.com/mongoose-os-libs/sntp
-  - origin: https://github.com/mongoose-os-libs/rpc-service-gpio
 
 
 config_schema:
@@ -41,12 +48,15 @@ config_schema:
   - ["coin.report_delay", "i", 5000, {title: "Coin report delay in ms"}]
   - ["app.machine_on", "b", false, {title: "Machine on state"}]
 
-  #- ["wifi.sta.ssid", "s", "PAPUCASA_2.4G", {title: "WiFi SSID"}]
-  #- ["wifi.sta.pass", "s", "Cuevademachos71", {title: "WiFi Password"}]
-  #- ["wifi.sta.enable", "b", true, {title: "Enable WiFi"}]
-  - ["wifi.sta.ssid", "s", "Inventoteca_2G", {title: "WiFi SSID"}]
-  - ["wifi.sta.pass", "s", "science_7425", {title: "WiFi Password"}]
-  - ["wifi.sta.enable", "b", true, {title: "Enable WiFi"}]
+  - ["wifi.sta1.ssid", "Inventoteca_2G"]
+  - ["wifi.sta1.pass", "science_7425"]
+  - ["wifi.sta1.enable", true]
+  - ["wifi.sta2.ssid", "4G-MIFI-C91"]
+  - ["wifi.sta2.pass", "1234567890"]
+  - ["wifi.sta2.enable", true]
+  - ["wifi.sta.ssid", "PAPUCASA_2.4G"]
+  - ["wifi.sta.pass", "Cuevademachos71"]
+  - ["wifi.sta.enable", true]
 
   - ["mqtt.enable", "b", true, {title: "Enable MQTT"}]
   - ["mqtt.server", "s", "broker.emqx.io:1883", {title: "MQTT Server"}]
@@ -57,9 +67,14 @@ config_schema:
   - ["sys.mount.fs_size", "i", 2048, {title: "Filesystem size in KB"}]
 
   - ["dash.enable", "b", true, {title: "Enable mDash"}]
-  - ["dash.token", "s", "jzgks691wMLewRq4kTeuTVQ", {title: "mDash token"}]
+  - ["dash.token", "s", "4n8KckV1Ih99NrK7QTmZA91w", {title: "mDash token"}]
   - ["rpc.uart.enable", "b", true, {title: "Enable UART for RPC"}]
-  - ["i2c.enable", true]
+
+ # I2C
+  - ["i2c.enable", "b", true, {title: "Enable I2C"}]
+  - ["i2c.freq", "i", 100000, {title: "I2C Frequency (Hz)"}]
+  - ["i2c.sda_gpio", "i", 21, {title: "I2C SDA GPIO Pin"}]
+  - ["i2c.scl_gpio", "i", 22, {title: "I2C SCL GPIO Pin"}]
 
   - ["sntp.enable", true]
   - ["sntp.server", "pool.ntp.org"]
@@ -67,4 +82,10 @@ config_schema:
   - ["sntp.retry_max", 30]
   - ["sntp.update_interval", 7200]
 
+
+  - ["app.pin_machine", "i", 33, {title: "Pin number for machine control"}]
+  - ["app.machine_on", "b", false, {title: "Machine on state"}]
+  #- ["app.pin_relay", "i", 4, {title: "Pin number for machine control"}]
+  - ["app.pin_relay", "i", 2, {title: "Pin number for machine control"}]
+  - ["app.check_interval_ms", "i", 2000, {title: "Check interval in milliseconds"}]
 
